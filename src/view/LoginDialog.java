@@ -3,6 +3,7 @@ package view;
 import javax.swing.*;
 
 import system.controller.LibrarySystem;
+import system.controller.User;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -109,6 +110,7 @@ public class LoginDialog extends JDialog implements ActionListener {
                     // 로그인 성공 시 처리할 내용 추가
                     JOptionPane.showMessageDialog(this, "로그인 성공");
                     // 처리가 완료되면 다이얼로그 닫기
+                    new User(username, password, userType); 
                     dispose();
                 } else {
                     // 로그인 실패 시 처리할 내용 추가

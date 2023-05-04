@@ -1,8 +1,9 @@
 package system.controller;
 
 import javax.swing.*;
-
+import javax.swing.text.View;
 import view.LoginDialog;
+import view.RentBook;
 import view.SearchBook;
 
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LibrarySystem extends JFrame {
-	private boolean isLoginSuccess = false;
+	private boolean isLoginSuccess;
 	private JButton searchButton; 		// "도서 검색" 버튼
 	private JButton requestButton; 		// "도서 요청" 버튼
 	private JButton rentButton; 		// "도서 빌림" 버튼
@@ -20,7 +21,7 @@ public class LibrarySystem extends JFrame {
     public LibrarySystem() {
         // 윈도우 설정
         setTitle("도서관 관리 시스템");
-        setSize(600, 400);
+        setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -44,16 +45,21 @@ public class LibrarySystem extends JFrame {
         northPanel.add(loginPanel, BorderLayout.EAST);
         add(northPanel, BorderLayout.NORTH);
         
-        // login dialog 연
+        // login dialog 연결
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // LoginDialog 생성
-                LoginDialog loginDialog = new LoginDialog(LibrarySystem.this);
-                loginDialog.setVisible(true);
-                boolean check = loginDialog.getCheck();
-                
-                setLoginSuccess(check);
+            	if(loginButton.getText().equals("로그인")) {
+            		 // LoginDialog 생성
+                    LoginDialog loginDialog = new LoginDialog(LibrarySystem.this);
+                    loginDialog.setVisible(true);
+                    boolean check = loginDialog.getCheck();
+                    
+                    setLoginSuccess(check);
+            	} else {
+            		User.logout();
+            		setLoginSuccess(User.auth);
+            	}
             }
         });
 
@@ -77,7 +83,7 @@ public class LibrarySystem extends JFrame {
         menuButtonPanel.add(returnButton);
         add(menuButtonPanel, BorderLayout.CENTER);
         
-        // 책 검색 페이지 연
+        // 책 검색 페이지 연결
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,18 +96,29 @@ public class LibrarySystem extends JFrame {
                 repaint();
             }
         });
-
         
+        // 책 검색 페이지 연결
+        rentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // SearchBookPanel 생성
+                RentBook rentPanel = new RentBook();
+                // 기존 창의 컨텐트 팬을 SearchBookPanel로 교체합니다.
+                setContentPane(rentPanel);
+                // 기존 창을 다시 그리도록 합니다.
+                revalidate();
+                repaint();
+            }
+        });
+        // 초기 권한값 설정
+    	setLoginSuccess(User.auth);
+    
         // updateMenuButton 호출
         updateMenuButton();
 
         // 윈도우 표시
         setVisible(true);
     }
-    public boolean isLoginSuccess() {
-        return isLoginSuccess;
-    }
-
     // isLoginSuccess setter
     public void setLoginSuccess(boolean success) {
         isLoginSuccess = success;
