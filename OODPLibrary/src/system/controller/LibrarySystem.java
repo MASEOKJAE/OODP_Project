@@ -13,11 +13,11 @@ import static system.controller.User.userCheck;
 public class LibrarySystem extends JFrame {
     private JButton adminButton;        // "관리" 버튼
     private boolean isLoginSuccess;
-    private JButton searchButton; 		// "도서 검색" 버튼
-    private JButton requestButton; 		// "도서 요청" 버튼
-    private JButton rentButton; 		// "도서 빌림" 버튼
-    private JButton reserveButton;		// "도서 예약" 버튼
-    private JButton loginButton; 		// "로그인" 버튼
+    private JButton searchButton;       // "도서 검색" 버튼
+    private JButton requestButton;       // "도서 요청" 버튼
+    private JButton rentButton;       // "도서 빌림" 버튼
+    private JButton reserveButton;      // "도서 예약" 버튼
+    private JButton loginButton;       // "로그인" 버튼
 
     public LibrarySystem() {
         setDisplay();
@@ -94,8 +94,10 @@ public class LibrarySystem extends JFrame {
 
                     setLoginSuccess(check);
                 } else {
-                    User.logout();
+                    User.getInstance().logout();
                     setLoginSuccess(User.auth);
+                    User instance = User.getInstance();
+                    instance.logout();
                 }
             }
         });

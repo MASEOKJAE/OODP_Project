@@ -136,6 +136,7 @@ public class RequestBook extends JPanel {
             writer.print(",");
             writer.println(yearField.getText());
             System.out.println(yearField.getText());
+            writer.close();
 
 
             // 모델에도 추가
@@ -147,7 +148,7 @@ public class RequestBook extends JPanel {
             publishField.setText("");
             yearField.setText("");
 
-            JOptionPane.showMessageDialog(null, "성공적으로 도서 요청이 완료되었습니다");
+            JOptionPane.showMessageDialog(null, "도서 요청이 완료되었습니다");
             System.out.println("Data added successfully to the Request_List.csv file.");
         } catch (IOException e) {
             System.out.println("Error occurred while adding data to the Request_List.csv file: " + e.getMessage());

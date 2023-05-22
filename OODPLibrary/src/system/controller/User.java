@@ -12,7 +12,7 @@ public class User {
     public static String userCheck;
 
 
-    public User(String id, String pw, String userCheck) {
+    private User(String id, String pw, String userCheck) {
         if(!auth)
             resetInfo();
         this.user_id = id;
@@ -71,9 +71,10 @@ public class User {
         userCheck = "";
     }
 
-    public static void logout() {
-//        resetInfo();
+    public void logout() {
+        resetInfo();
         auth = false;
+        instance = null;
     }
 
 }
