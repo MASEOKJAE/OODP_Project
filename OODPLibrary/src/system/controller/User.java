@@ -9,7 +9,7 @@ public class User {
     private int due_date;
     public static boolean auth;
     private int loan_limit;
-    private String userCheck;
+    public static String userCheck;
 
 
     public User(String id, String pw, String userCheck) {

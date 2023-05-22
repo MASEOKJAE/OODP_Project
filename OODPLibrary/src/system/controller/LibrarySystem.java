@@ -2,14 +2,13 @@ package system.controller;
 
 import javax.swing.*;
 
-import view.LoginDialog;
-import view.RentBook;
-import view.SearchBook;
-import view.adminPage;
+import view.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static system.controller.User.userCheck;
 
 public class LibrarySystem extends JFrame {
     private JButton adminButton;        // "관리" 버튼
@@ -21,17 +20,21 @@ public class LibrarySystem extends JFrame {
     private JButton loginButton; 		// "로그인" 버튼
 
     public LibrarySystem() {
+        setDisplay();
+        addListener();
+    }
+    private void setDisplay() {
         // 윈도우 설정
         setTitle("도서관 관리 시스템");
         setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        JPanel northPanel = new JPanel(new BorderLayout());
 
         // 레이아웃 설정
         setLayout(new BorderLayout());
 
         // 도서관 이미지 추가
-        JPanel northPanel = new JPanel(new BorderLayout());
         ImageIcon libraryImage = new ImageIcon(getClass().getResource("/resources/LibLogo.png"));
         Image scaledImage = libraryImage.getImage().getScaledInstance(200, -1, Image.SCALE_SMOOTH); // 이미지 크기 조정
         libraryImage = new ImageIcon(scaledImage);
@@ -48,43 +51,12 @@ public class LibrarySystem extends JFrame {
         northPanel.add(loginPanel, BorderLayout.EAST);
         add(northPanel, BorderLayout.NORTH);
 
-        // login dialog 연결
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(loginButton.getText().equals("로그인")) {
-                    // LoginDialog 생성
-                    LoginDialog loginDialog = new LoginDialog(LibrarySystem.this);
-                    loginDialog.setVisible(true);
-                    boolean check = loginDialog.getCheck();
-
-                    setLoginSuccess(check);
-                } else {
-                    User.logout();
-                    setLoginSuccess(User.auth);
-                }
-            }
-        });
-
         // 관리자 버튼 추가
         this.adminButton = new JButton("관리 페이지");
         JPanel adminPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         adminPanel.add(adminButton);
         northPanel.add(adminPanel, BorderLayout.CENTER);
         add(northPanel, BorderLayout.NORTH);
-
-        adminButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // adminPanel 생성
-                adminPage adminPanel = new adminPage();
-                // 기존 창의 컨텐트 팬을 adminPanel로 교체합니다.
-                setContentPane(adminPanel);
-                // 기존 창을 다시 그리도록 합니다.
-                revalidate();
-                repaint();
-            }
-        });
 
         // 메뉴 버튼 추가
         JPanel menuButtonPanel = new JPanel(new GridLayout(1, 5));
@@ -106,6 +78,41 @@ public class LibrarySystem extends JFrame {
         menuButtonPanel.add(returnButton);
         add(menuButtonPanel, BorderLayout.CENTER);
 
+        setVisible(true);
+    }
+
+    private void addListener() {
+        // login dialog 연결
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(loginButton.getText().equals("로그인")) {
+                    // LoginDialog 생성
+                    LoginDialog loginDialog = new LoginDialog(LibrarySystem.this);
+                    loginDialog.setVisible(true);
+                    boolean check = loginDialog.getCheck();
+
+                    setLoginSuccess(check);
+                } else {
+                    User.logout();
+                    setLoginSuccess(User.auth);
+                }
+            }
+        });
+
+        adminButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // adminPanel 생성
+                adminPage adminPanel = new adminPage();
+                // 기존 창의 컨텐트 팬을 adminPanel로 교체합니다.
+                setContentPane(adminPanel);
+                // 기존 창을 다시 그리도록 합니다.
+                revalidate();
+                repaint();
+            }
+        });
+
         // 책 검색 페이지 연결
         searchButton.addActionListener(new ActionListener() {
             @Override
@@ -114,6 +121,19 @@ public class LibrarySystem extends JFrame {
                 SearchBook searchPanel = new SearchBook();
                 // 기존 창의 컨텐트 팬을 SearchBookPanel로 교체합니다.
                 setContentPane(searchPanel);
+                // 기존 창을 다시 그리도록 합니다.
+                revalidate();
+                repaint();
+            }
+        });
+
+        requestButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // SearchBookPanel 생성
+                RequestBook requestPanel = new RequestBook();
+                // 기존 창의 컨텐트 팬을 SearchBookPanel로 교체합니다.
+                setContentPane(requestPanel);
                 // 기존 창을 다시 그리도록 합니다.
                 revalidate();
                 repaint();
@@ -138,10 +158,8 @@ public class LibrarySystem extends JFrame {
 
         // updateMenuButton 호출
         updateMenuButton();
-
-        // 윈도우 표시
-        setVisible(true);
     }
+
     // isLoginSuccess setter
     public void setLoginSuccess(boolean success) {
         isLoginSuccess = success;
@@ -151,6 +169,12 @@ public class LibrarySystem extends JFrame {
     // 메뉴 버튼 활성화/비활성화 메서드
     public void updateMenuButton() {
         // "도서 요청", "도서 대여", "도서 예약" 버튼 비활성화
+
+        if (isLoginSuccess && userCheck.equals("admin")) {
+            adminButton.setEnabled(true);
+        } else {
+            adminButton.setEnabled(false);
+        }
         requestButton.setEnabled(isLoginSuccess);
         rentButton.setEnabled(isLoginSuccess);
         reserveButton.setEnabled(isLoginSuccess);
