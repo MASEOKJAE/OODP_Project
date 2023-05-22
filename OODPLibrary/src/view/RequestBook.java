@@ -41,12 +41,8 @@ public class RequestBook extends JPanel {
         // 검색 버튼 생성
         requestButton = new JButton("요청");
 
-        // 입력창 초기화
-        titleField = new JTextField();
-        authorField = new JTextField();
-        publishField = new JTextField();
-        yearField = new JTextField();
-
+        // 모델 초기화
+        model = new DefaultTableModel();
     }
     private void setDisplay() {
         JPanel panel = new JPanel(new BorderLayout());
@@ -57,10 +53,10 @@ public class RequestBook extends JPanel {
         authorLabel = new JLabel("저자명: ");
         publishLabel = new JLabel("출판사: ");
         yearLabel = new JLabel("발행년도: ");
-        JTextField titleField = new JTextField(10);
-        JTextField authorField = new JTextField(10);
-        JTextField publishField = new JTextField(10);
-        JTextField yearField = new JTextField(10);
+        titleField = new JTextField(10);
+        authorField = new JTextField(10);
+        publishField = new JTextField(10);
+        yearField = new JTextField(10);
 
         inputPanel.add(pageTitle);
         inputPanel.add(new JPanel()); // 빈 패널을 추가하여 한 칸을 차지하도록 함
@@ -104,24 +100,43 @@ public class RequestBook extends JPanel {
         requestButton.addActionListener(listener);
     }
 
-    private void addToRequestList() {
+    public int getLastRowNumber(String filePath) {
+        int lastRowNumber = 0;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lastRowNumber++;
+            }
+        } catch (IOException e) {
+            System.out.println("Error occurred while reading the CSV file: " + e.getMessage());
+        }
+
+        return lastRowNumber;
+    }
+    public void addToRequestList() {
         String filePath = System.getProperty("user.dir") + "/src/resources/Request_List.csv";
 
         try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filePath, true)))) {
             // 맨 마지막 인덱스 가져오기
-            int lastIndex = model.getRowCount() > 0 ? Integer.parseInt(model.getValueAt(model.getRowCount() - 1, 0).toString()) : 0;
-            int newIndex = lastIndex + 1;
+            int newIndex = getLastRowNumber(filePath);
 
             // 데이터 추가
             writer.print(newIndex);
+            System.out.println(newIndex);
             writer.print(",");
             writer.print(titleField.getText());
+            System.out.println(titleField.getText());
             writer.print(",");
             writer.print(authorField.getText());
+            System.out.println(authorField.getText());
             writer.print(",");
             writer.print(publishField.getText());
+            System.out.println(publishField.getText());
             writer.print(",");
             writer.println(yearField.getText());
+            System.out.println(yearField.getText());
+
 
             // 모델에도 추가
             model.addRow(new Object[] { newIndex, titleField.getText(), authorField.getText(), publishField.getText(), yearField.getText() });
@@ -132,6 +147,7 @@ public class RequestBook extends JPanel {
             publishField.setText("");
             yearField.setText("");
 
+            JOptionPane.showMessageDialog(null, "성공적으로 도서 요청이 완료되었습니다");
             System.out.println("Data added successfully to the Request_List.csv file.");
         } catch (IOException e) {
             System.out.println("Error occurred while adding data to the Request_List.csv file: " + e.getMessage());
