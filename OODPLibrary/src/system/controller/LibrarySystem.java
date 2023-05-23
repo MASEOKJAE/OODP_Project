@@ -14,10 +14,10 @@ public class LibrarySystem extends JFrame {
     private JButton adminButton;        // "관리" 버튼
     private boolean isLoginSuccess;
     private JButton searchButton;       // "도서 검색" 버튼
-    private JButton requestButton;       // "도서 요청" 버튼
-    private JButton rentButton;       // "도서 빌림" 버튼
+    private JButton requestButton;      // "도서 요청" 버튼
+    private JButton rentButton;         // "도서 빌림" 버튼
     private JButton reserveButton;      // "도서 예약" 버튼
-    private JButton loginButton;       // "로그인" 버튼
+    private JButton loginButton;        // "로그인" 버튼
 
     public LibrarySystem() {
         setDisplay();
@@ -89,15 +89,13 @@ public class LibrarySystem extends JFrame {
                 if(loginButton.getText().equals("로그인")) {
                     // LoginDialog 생성
                     LoginDialog loginDialog = new LoginDialog(LibrarySystem.this);
-                    loginDialog.setVisible(true);
                     boolean check = loginDialog.getCheck();
 
                     setLoginSuccess(check);
                 } else {
+                    // 싱글톤 패턴 적용
                     User.getInstance().logout();
                     setLoginSuccess(User.auth);
-                    User instance = User.getInstance();
-                    instance.logout();
                 }
             }
         });

@@ -72,7 +72,7 @@ public class RequestSearcher {
             writer.print(",");
             writer.print(bookInfo[3]);
             writer.print(",");
-            writer.println(bookInfo[4]);
+            writer.print(bookInfo[4]);
             writer.print(",");
             writer.print("대여 가능");
             writer.close();

@@ -19,14 +19,13 @@ public class LoginDialog extends JDialog implements ActionListener {
     private JPasswordField passwordField;
     private JRadioButton userCheck[] = new JRadioButton[3];
     private String[] user = {"student", "professor", "admin"}; // 0 = 학생, 1 = 교수, 2 = 도서관 관리
-    private LibrarySystem librarySystem;
     private boolean isLoginSuccess = false;
 
 
     public LoginDialog(JFrame parent) {
         super(parent, "로그인", true);
         setLayout(new BorderLayout());
-        
+
         // 로그인 폼 생성
         JPanel formPanel = new JPanel(new GridLayout(3, 2, 5, 5));
         ButtonGroup group = new ButtonGroup();
@@ -40,16 +39,22 @@ public class LoginDialog extends JDialog implements ActionListener {
             formPanel.add(userCheck[i]);
             userCheck[i].addActionListener(this);
         }
+        formPanel.add(new JLabel()); // 빈 레이블 추가
         formPanel.add(usernameLabel);
         formPanel.add(usernameField);
+        formPanel.add(new JLabel()); // 빈 레이블 추가
         formPanel.add(passwordLabel);
         formPanel.add(passwordField);
-        add(formPanel, BorderLayout.CENTER);
+
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(formPanel, BorderLayout.WEST); // formPanel을 가운데에 배치
+
+        add(panel, BorderLayout.CENTER);
 
         // 로그인, 취소 버튼 생성
         JButton loginButton = new JButton("로그인");
         JButton cancelButton = new JButton("취소");
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.add(loginButton);
         buttonPanel.add(cancelButton);
         add(buttonPanel, BorderLayout.SOUTH);
@@ -109,7 +114,7 @@ public class LoginDialog extends JDialog implements ActionListener {
                 if (isLoginSuccess) {
                     // 로그인 성공 시 처리할 내용 추가
                     JOptionPane.showMessageDialog(this, "로그인 성공");
-                    // 처리가 완료되면 다이얼로그 닫기
+                    // 처리가 완료되면 다이얼로그 닫기, 싱글톤 패턴 적용
                     User.getInstance(username, password, userType);
                     dispose();
                 } else {

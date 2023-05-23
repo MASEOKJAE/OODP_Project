@@ -144,7 +144,6 @@ public class RentBook extends JPanel {
                                 temp2+=data[i]+",";
                         }
                         rentInfo = data[1];
-                        JOptionPane.showMessageDialog(null, "\n도서명: " + rentInfo + "\n\n대여가 완료되었습니다");
                     }
                     sb.append(line);
                 }
@@ -166,7 +165,7 @@ public class RentBook extends JPanel {
                 writer.write("\uFEFF");
                 writer.write(temp);
                 writer.close();
-                filePath = System.getProperty("user.dir") + "/src/resources/Rent_Book_List.csv";
+                filePath = System.getProperty("user.dir") + "/src/resources/RentBook_List.csv";
                 writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath,true), StandardCharsets.UTF_8));
                 writer.write("\uFEFF");
                 writer.write(temp2+userinfo.getID()+","+today+","+stDate+"\n");
@@ -188,7 +187,7 @@ public class RentBook extends JPanel {
         model.setRowCount(0);
         try {
             // 파일에서 데이터 읽기
-            String filePath = System.getProperty("user.dir") + "/src/resources/Rent_Book_List.csv";
+            String filePath = System.getProperty("user.dir") + "/src/resources/RentBook_List.csv";
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line = reader.readLine();
             while ((line = reader.readLine()) != null) {
@@ -204,9 +203,5 @@ public class RentBook extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
-
-
 }
