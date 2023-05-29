@@ -12,9 +12,14 @@ public class BookSearcher {
     public void setSearchStrategy(SearchStrategy searchStrategy) {
         this.searchStrategy = searchStrategy;
     }
-    
+
+
+
+
+
+	// 수정!!!!
     public void search(String type, String query, DefaultTableModel model) {
-        // 현재 선택된 검색 알고리즘을 실행합니다.
+        // 현재 선택된 검색 알고리즘을 실행합니다. 	-> 	수정, 다시 스트레티지 패턴 적용할 것
     	switch (type) {
 	        case "제어번호":
 	        	this.setSearchStrategy(new IndexSearch());                                
@@ -34,6 +39,14 @@ public class BookSearcher {
 	        default:
 	            break;
     	}
+		// 수정 !!!!
+
+
+
+
+
+
+
     	model.setNumRows(0);
         try {
             // 파일에서 데이터 읽기

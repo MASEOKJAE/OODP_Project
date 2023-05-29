@@ -1,6 +1,6 @@
 package admin;
 
-import view.adminPage;
+import view.AdminPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -109,7 +109,7 @@ public class RequestAdmin extends JPanel {
                 if(backButton.equals(ae.getSource())){
                     JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RequestAdmin.this);
                     frame.getContentPane().removeAll(); // 기존 컨텐트 팬 제거
-                    frame.getContentPane().add(new adminPage()); // 새로운 컨텐트 팬 추가
+                    frame.getContentPane().add(new AdminPage()); // 새로운 컨텐트 팬 추가
                     frame.revalidate();
                     frame.repaint();
                 }

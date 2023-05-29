@@ -49,6 +49,10 @@ public class User {
         return auth;
     }
 
+    public int getLoanLimit() {
+        return loan_limit;
+    }
+
 
     // overdueCounter() 메서드
     public int overdueCounter() {

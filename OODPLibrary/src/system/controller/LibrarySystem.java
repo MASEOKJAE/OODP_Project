@@ -17,6 +17,8 @@ public class LibrarySystem extends JFrame {
     private JButton requestButton;      // "도서 요청" 버튼
     private JButton rentButton;         // "도서 빌림" 버튼
     private JButton reserveButton;      // "도서 예약" 버튼
+
+    private JButton returnButton;       // "도서 반납" 버튼
     private JButton loginButton;        // "로그인" 버튼
 
     public LibrarySystem() {
@@ -69,7 +71,7 @@ public class LibrarySystem extends JFrame {
         rentButton.setPreferredSize(new Dimension(200, 50)); // JButton 크기 설정
         this.reserveButton = new JButton("도서 예약");
         reserveButton.setPreferredSize(new Dimension(200, 50)); // JButton 크기 설정
-        JButton returnButton = new JButton("도서 반납");
+        this.returnButton = new JButton("도서 반납");
         returnButton.setPreferredSize(new Dimension(200, 50)); // JButton 크기 설정
         menuButtonPanel.add(searchButton);
         menuButtonPanel.add(requestButton);
@@ -104,7 +106,7 @@ public class LibrarySystem extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // adminPanel 생성
-                adminPage adminPanel = new adminPage();
+                AdminPage adminPanel = new AdminPage();
                 // 기존 창의 컨텐트 팬을 adminPanel로 교체합니다.
                 setContentPane(adminPanel);
                 // 기존 창을 다시 그리도록 합니다.
@@ -148,6 +150,20 @@ public class LibrarySystem extends JFrame {
                 RentBook rentPanel = new RentBook();
                 // 기존 창의 컨텐트 팬을 SearchBookPanel로 교체합니다.
                 setContentPane(rentPanel);
+                // 기존 창을 다시 그리도록 합니다.
+                revalidate();
+                repaint();
+            }
+        });
+
+        // 책 빌림 페이지 연결
+        reserveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // SearchBookPanel 생성
+                ReserveBook reservePanel = new ReserveBook();
+                // 기존 창의 컨텐트 팬을 SearchBookPanel로 교체합니다.
+                setContentPane(reservePanel);
                 // 기존 창을 다시 그리도록 합니다.
                 revalidate();
                 repaint();

@@ -4,18 +4,17 @@ import admin.RequestAdmin;
 import system.controller.LibrarySystem;
 
 import javax.swing.*;
-import javax.swing.text.View;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class adminPage extends JPanel {
+public class AdminPage extends JPanel {
     private JButton requestAcceptButton; // "도서 요청 리스트" 버튼
     private JButton bookManageButton;	// "책 관리" 버튼
     private JButton backButton;         // "뒤로 가기" 버튼
 
-    public adminPage() {
+    public AdminPage() {
         setDisplay();
         homeSet();
     }
@@ -45,7 +44,7 @@ public class adminPage extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LibrarySystem으로 돌아갑니다.
-                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(adminPage.this);
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminPage.this);
                 frame.dispose();
                 frame.setContentPane(new LibrarySystem());
                 frame.revalidate();
@@ -58,7 +57,7 @@ public class adminPage extends JPanel {
                 // requestPanel 생성
                 RequestAdmin requestPanel = new RequestAdmin();
                 // 현재 패널의 최상위 JFrame 컨테이너를 찾습니다.
-                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(adminPage.this);
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminPage.this);
                 // 기존 컨텐트 팬을 제거하고, requestPanel을 추가합니다.
                 frame.setContentPane(requestPanel);
                 // 기존 창을 다시 그리도록 합니다.

@@ -106,7 +106,7 @@ public class RentBook extends JPanel {
         Calendar c = Calendar.getInstance();
         //대여일자와 반납일자 설정
         String today = sdf.format(c.getTime());
-        c.add(Calendar.DATE, +7);
+        c.add(Calendar.DATE, userinfo.getLoanLimit());
         String stDate = sdf.format(c.getTime());
 
         boolean rented = true, bookCheck = false;         // 대여 가능한 책만 파일 수정, bookCheck가 true면 존재하는 책
