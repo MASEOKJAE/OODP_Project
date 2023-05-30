@@ -47,9 +47,8 @@ public class ReserveBook extends JPanel {
         model.addColumn("저자");
         model.addColumn("발행처");
         model.addColumn("발행년도");
-        model.addColumn("대여");
         model.addColumn("ID");
-        model.addColumn("대여일자");
+        model.addColumn("예약일자");
         model.addColumn("반납일자");
         bookTable.setModel(model);
 
@@ -235,7 +234,7 @@ public class ReserveBook extends JPanel {
         model.setRowCount(0);
         try {
             // 파일에서 데이터 읽기
-            String filePath = System.getProperty("user.dir") + "/src/resources/RentBook_List.csv";
+            String filePath = System.getProperty("user.dir") + "/src/resources/ReserveBook_List.csv";
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line = reader.readLine();
             while ((line = reader.readLine()) != null) {
@@ -243,7 +242,7 @@ public class ReserveBook extends JPanel {
                 if(data.length>0) {
                     if(data[1].charAt(0) == '\"')
                         data[1] = data[1].replaceAll("\"","");
-                    if(data[6].equals(userinfo.getID()))
+                    if(data[5].equals(userinfo.getID()))
                         model.addRow(data);
                 }
             }
