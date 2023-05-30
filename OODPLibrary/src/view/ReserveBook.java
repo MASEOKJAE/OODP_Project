@@ -217,12 +217,13 @@ public class ReserveBook extends JPanel {
                     writer.close();
 
                     JOptionPane.showMessageDialog(null, "\n도서명: " + storeInfo[1].replaceAll("\"", "") + "\n\n예약이 완료되었습니다");
+                    refresh();
                     System.out.println("Data added successfully to the ReserveBook_List.csv file.");
                 } catch (IOException e) {
                     System.out.println("Error occurred while adding data to the ReserveBook_List.csv file: " + e.getMessage());
                 }
             } else if (!bookCheck) {
-                JOptionPane.showMessageDialog(null, "대여 중인 도서가 아닙니다");
+                JOptionPane.showMessageDialog(null, "예약 가능한 도서가 아닙니다");
             }
         } catch (IOException e) {
             e.printStackTrace();
