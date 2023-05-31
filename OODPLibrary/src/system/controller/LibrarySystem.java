@@ -169,6 +169,21 @@ public class LibrarySystem extends JFrame {
                 repaint();
             }
         });
+
+        // 책 반납 페이지 연결
+        returnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // ReturnBookPanel 생성
+                ReturnBook returnPanel = new ReturnBook();
+                // 기존 창의 컨텐트 팬을 ReturnBookPanel로 교체합니다.
+                setContentPane(returnPanel);
+                // 기존 창을 다시 그리도록 합니다.
+                revalidate();
+                repaint();
+            }
+        });
+
         // 초기 권한값 설정
         setLoginSuccess(User.auth);
 

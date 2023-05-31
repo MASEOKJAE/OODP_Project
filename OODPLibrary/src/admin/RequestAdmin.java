@@ -12,6 +12,21 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+// Observer 인터페이스를 구현하는 BookTableObserver 클래스 생성
+class BookTableObserver implements RequestSearcherObserver {
+    private DefaultTableModel model;
+
+    public BookTableObserver(DefaultTableModel model) {
+        this.model = model;
+    }
+
+    // Observer 인터페이스의 메소드 구현
+    @Override
+    public void update(String[] bookInfo) {
+        model.addRow(bookInfo);
+    }
+}
+
 public class RequestAdmin extends JPanel {
     private JTextField searchField;
     private RequestSearcher searcher;
@@ -21,7 +36,7 @@ public class RequestAdmin extends JPanel {
     private JComboBox<String> comboBox;
     private JButton searchButton;
     private JScrollPane scrollPane;
-
+    private BookTableObserver observer;
 
     public RequestAdmin() {
         init();
@@ -30,8 +45,7 @@ public class RequestAdmin extends JPanel {
     }
 
     private void init() {
-        searcher = new RequestSearcher(); // searcher 객체를 생성
-        // 테이블 생성
+        searcher = new RequestSearcher();
         bookTable = new JTable();
         model = new DefaultTableModel();
         model.addColumn("제어번호");
@@ -40,26 +54,20 @@ public class RequestAdmin extends JPanel {
         model.addColumn("발행처");
         model.addColumn("발행년도");
         bookTable.setModel(model);
-
-        //뒤로가기 버튼 생성
         backButton = new JButton("뒤로 가기");
-        // 콤보 박스 생성
         comboBox = new JComboBox<>();
         comboBox.addItem("등록");
         comboBox.addItem("요청 거절");
-
-        // 검색 버튼 생성
         searchButton = new JButton("처리");
 
         try {
-            // 파일에서 데이터 읽기
             String filePath = System.getProperty("user.dir") + "/src/resources/Request_List.csv";
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line = reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-                if(data[0].charAt(0) == '\"')
-                    data[0] = data[0].substring(1, data[0].length()-1);
+                if (data[0].charAt(0) == '\"')
+                    data[0] = data[0].substring(1, data[0].length() - 1);
 
                 model.addRow(data);
             }
@@ -67,6 +75,9 @@ public class RequestAdmin extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        observer = new BookTableObserver(model); // Observer 객체 생성
+        searcher.attach(observer); // Observer를 Subject에 등록
     }
     private void setDisplay() {
         JPanel panel = new JPanel(new BorderLayout());

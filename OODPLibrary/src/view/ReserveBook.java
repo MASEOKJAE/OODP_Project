@@ -165,7 +165,7 @@ public class ReserveBook extends JPanel {
                         System.out.print("[" + data[0].charAt(i) + "]");
                     }
 
-                    if(data[0].substring(1).equals(bookControlNumber)) {
+                    if(data[0].equals(bookControlNumber)) {
                         bookCheck = true;
                         storeInfo = data;
                         System.out.println("!!Rent!! 에서 일치 항목 발생!!!");
