@@ -1,4 +1,4 @@
-package admin;
+package Controller.admin;
 
 import java.io.*;
 import javax.swing.*;
@@ -72,7 +72,7 @@ public class RequestSearcher implements RequestSearcherSubject {
     }
 
     public void addBookLibrary() {
-        String filePath = System.getProperty("user.dir") + "/src/resources/Book_List.csv";
+        String filePath = System.getProperty("user.dir") + "/src/Model/resources/Book_List.csv";
 
         try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filePath, true)))) {
             int newIndex = getLastRowNumber(filePath);

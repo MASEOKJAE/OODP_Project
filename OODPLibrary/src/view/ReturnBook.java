@@ -1,4 +1,4 @@
-package view;
+package View;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -7,28 +7,21 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.Data;
 
-import system.controller.LibrarySystem;
-import system.controller.User;
+import Controller.LibrarySystem;
+import Model.User;
 
 @SuppressWarnings("serial")
 public class ReturnBook extends JPanel {
@@ -87,7 +80,7 @@ public class ReturnBook extends JPanel {
 
         try {
             // 파일에서 데이터 읽기
-            String filePath = System.getProperty("user.dir") + "/src/resources/Book_List.csv";
+            String filePath = System.getProperty("user.dir") + "/src/Model/resources/Book_List.csv";
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line = "";
 
@@ -129,7 +122,7 @@ public class ReturnBook extends JPanel {
                 writer.close();
                 temp="";
 
-                filePath = System.getProperty("user.dir") + "/src/resources/RentBook_List.csv";
+                filePath = System.getProperty("user.dir") + "/src/Model/resources/RentBook_List.csv";
                 reader = new BufferedReader(new FileReader(filePath));
 
                 while ((line = reader.readLine()) != null) {

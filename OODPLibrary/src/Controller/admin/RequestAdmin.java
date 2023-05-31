@@ -1,6 +1,6 @@
-package admin;
+package Controller.admin;
 
-import view.AdminPage;
+import View.AdminPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -23,7 +23,7 @@ class BookTableObserver implements RequestSearcherObserver {
     // Observer 인터페이스의 메소드 구현
     @Override
     public void update(String[] bookInfo) {
-        model.addRow(bookInfo);
+//        model.addRow(bookInfo);
     }
 }
 
@@ -61,7 +61,7 @@ public class RequestAdmin extends JPanel {
         searchButton = new JButton("처리");
 
         try {
-            String filePath = System.getProperty("user.dir") + "/src/resources/Request_List.csv";
+            String filePath = System.getProperty("user.dir") + "/src/Model/resources/Request_List.csv";
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line = reader.readLine();
             while ((line = reader.readLine()) != null) {

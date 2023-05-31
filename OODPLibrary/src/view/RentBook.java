@@ -1,4 +1,4 @@
-package view;
+package View;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -19,10 +18,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.Data;
 
-import system.controller.LibrarySystem;
-import system.controller.User;
+import Controller.LibrarySystem;
+import Model.User;
 
 @SuppressWarnings("serial")
 public class RentBook extends JPanel {
@@ -109,7 +107,7 @@ public class RentBook extends JPanel {
 
         try {
             // 파일에서 데이터 읽기
-            String filePath = System.getProperty("user.dir") + "/src/resources/Book_List.csv";
+            String filePath = System.getProperty("user.dir") + "/src/Model/resources/Book_List.csv";
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             StringBuilder sb = new StringBuilder();
             String line = "";
@@ -158,7 +156,7 @@ public class RentBook extends JPanel {
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8));
                 writer.write(temp);
                 writer.close();
-                filePath = System.getProperty("user.dir") + "/src/resources/RentBook_List.csv";
+                filePath = System.getProperty("user.dir") + "/src/Model/resources/RentBook_List.csv";
                 writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath,true), StandardCharsets.UTF_8));
                 writer.write(temp2+userinfo.getID()+","+today+","+stDate+"\n");
                 writer.close();
@@ -179,7 +177,7 @@ public class RentBook extends JPanel {
         model.setRowCount(0);
         try {
             // 파일에서 데이터 읽기
-            String filePath = System.getProperty("user.dir") + "/src/resources/RentBook_List.csv";
+            String filePath = System.getProperty("user.dir") + "/src/Model/resources/RentBook_List.csv";
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8));
             String line;
             while ((line = reader.readLine()) != null) {

@@ -1,14 +1,12 @@
-package view;
+package View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
-import system.controller.LibrarySystem;
-import searchBook.*;
+import Controller.LibrarySystem;
 
 @SuppressWarnings("serial")
 public class RequestBook extends JPanel {
@@ -115,7 +113,7 @@ public class RequestBook extends JPanel {
         return lastRowNumber;
     }
     public void addToRequestList() {
-        String filePath = System.getProperty("user.dir") + "/src/resources/Request_List.csv";
+        String filePath = System.getProperty("user.dir") + "/src/Model/resources/Request_List.csv";
 
         try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filePath, true)))) {
             // 맨 마지막 인덱스 가져오기

@@ -1,12 +1,10 @@
-package view;
+package View;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -20,10 +18,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.Data;
 
-import system.controller.LibrarySystem;
-import system.controller.User;
+import Controller.LibrarySystem;
+import Model.User;
 
 @SuppressWarnings("serial")
 public class ReserveBook extends JPanel {
@@ -124,7 +121,7 @@ public class ReserveBook extends JPanel {
 
         try {
             // 파일에서 데이터 읽기
-            String reservePath = System.getProperty("user.dir") + "/src/resources/ReserveBook_List.csv";
+            String reservePath = System.getProperty("user.dir") + "/src/Model/resources/ReserveBook_List.csv";
             BufferedReader reader = new BufferedReader(new FileReader(reservePath));
             StringBuilder sb = new StringBuilder();
             String line = "";
@@ -150,7 +147,7 @@ public class ReserveBook extends JPanel {
 
             // 만약, 책이 ReserveBook_List에 없을 경우
             if(!bookCheck) {
-                String rentPath = System.getProperty("user.dir") + "/src/resources/RentBook_List.csv";
+                String rentPath = System.getProperty("user.dir") + "/src/Model/resources/RentBook_List.csv";
                 reader = new BufferedReader(new FileReader(rentPath));
                 sb = new StringBuilder();
                 line = "";
@@ -235,7 +232,7 @@ public class ReserveBook extends JPanel {
         model.setRowCount(0);
         try {
             // 파일에서 데이터 읽기
-            String filePath = System.getProperty("user.dir") + "/src/resources/ReserveBook_List.csv";
+            String filePath = System.getProperty("user.dir") + "/src/Model/resources/ReserveBook_List.csv";
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line = reader.readLine();
             while ((line = reader.readLine()) != null) {

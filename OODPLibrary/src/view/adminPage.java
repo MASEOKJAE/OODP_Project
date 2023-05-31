@@ -1,7 +1,7 @@
-package view;
+package View;
 
-import admin.RequestAdmin;
-import system.controller.LibrarySystem;
+import Controller.admin.RequestAdmin;
+import Controller.LibrarySystem;
 
 import javax.swing.*;
 

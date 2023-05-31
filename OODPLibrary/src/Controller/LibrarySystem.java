@@ -1,14 +1,13 @@
-package system.controller;
+package Controller;
 
 import javax.swing.*;
 
-import view.*;
+import Model.User;
+import View.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import static system.controller.User.userCheck;
 
 public class LibrarySystem extends JFrame {
     private JButton adminButton;        // "관리" 버튼
@@ -37,7 +36,7 @@ public class LibrarySystem extends JFrame {
         setLayout(new BorderLayout());
 
         // 도서관 이미지 추가
-        ImageIcon libraryImage = new ImageIcon(getClass().getResource("/resources/LibLogo.png"));
+        ImageIcon libraryImage = new ImageIcon(getClass().getResource("../Model/resources/LibLogo.png"));
         Image scaledImage = libraryImage.getImage().getScaledInstance(200, -1, Image.SCALE_SMOOTH); // 이미지 크기 조정
         libraryImage = new ImageIcon(scaledImage);
         JLabel libraryImageLabel = new JLabel(libraryImage);
@@ -201,7 +200,7 @@ public class LibrarySystem extends JFrame {
     public void updateMenuButton() {
         // "도서 요청", "도서 대여", "도서 예약" 버튼 비활성화
 
-        if (isLoginSuccess && userCheck.equals("admin")) {
+        if (isLoginSuccess && User.userCheck.equals("admin")) {
             adminButton.setEnabled(true);
         } else {
             adminButton.setEnabled(false);

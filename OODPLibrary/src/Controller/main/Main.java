@@ -1,6 +1,6 @@
-package main;
+package Controller.main;
 
-import system.controller.LibrarySystem;
+import Controller.LibrarySystem;
 
 public class Main {
     public static void main(String[] args) {

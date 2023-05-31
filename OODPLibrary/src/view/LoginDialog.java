@@ -1,9 +1,8 @@
-package view;
+package View;
 
 import javax.swing.*;
 
-import system.controller.LibrarySystem;
-import system.controller.User;
+import Model.User;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -92,11 +91,11 @@ public class LoginDialog extends JDialog implements ActionListener {
             String csvFile = null;
 	        
 	        if(userType.equals("student"))
-	        	csvFile = System.getProperty("user.dir") + "/src/resources/Std_info.csv";
+	        	csvFile = System.getProperty("user.dir") + "/src/Model/resources/Std_info.csv";
 	        else if(userType.equals("professor"))
-	        	csvFile = System.getProperty("user.dir") + "/src/resources/Prof_info.csv";
+	        	csvFile = System.getProperty("user.dir") + "/src/Model/resources/Prof_info.csv";
 	        else if(userType.equals("admin"))
-	        	csvFile = System.getProperty("user.dir") + "/src/resources/Admin_info.csv";
+	        	csvFile = System.getProperty("user.dir") + "/src/Model/resources/Admin_info.csv";
             String line = "";
             String csvSplitBy = ",";
             
