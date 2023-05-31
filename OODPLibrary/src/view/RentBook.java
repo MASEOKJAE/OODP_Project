@@ -3,13 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -186,8 +180,8 @@ public class RentBook extends JPanel {
         try {
             // 파일에서 데이터 읽기
             String filePath = System.getProperty("user.dir") + "/src/resources/RentBook_List.csv";
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            String line = reader.readLine();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8));
+            String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
                 if(data.length>0) {

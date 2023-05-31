@@ -82,9 +82,8 @@ public class ReturnBook extends JPanel {
         int rentcol = 5;
         String rentInfo = "";
 
-        boolean rented = false, bookCheck = false;			// 대여 가능한 책만 파일 수정, bookCheck가 true면 존재하는 책
+        boolean rented = false, bookCheck = false;         // 대여 가능한 책만 파일 수정, bookCheck가 true면 존재하는 책
         String temp = "";
-        String temp2 = "";
 
         try {
             // 파일에서 데이터 읽기
@@ -103,7 +102,7 @@ public class ReturnBook extends JPanel {
                     bookCheck = true;
                     // 책이 이미 대여 중이 아닐 때
                     if(data[rentcol].equals("대여 가능")) {
-                        JOptionPane.showMessageDialog(null, "해당 도서는 대여 중 상태가 아닙니다");
+                        JOptionPane.showMessageDialog(null, "해당 도서는 '대여 중' 상태가 아닙니다");
                         break;
                     } else {
                         rented = true;
@@ -128,23 +127,28 @@ public class ReturnBook extends JPanel {
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8));
                 writer.write(temp);
                 writer.close();
+                temp="";
 
                 filePath = System.getProperty("user.dir") + "/src/resources/RentBook_List.csv";
                 reader = new BufferedReader(new FileReader(filePath));
+
                 while ((line = reader.readLine()) != null) {
                     String[] data = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
                     if(data.length>0) {
                         if(data[1].charAt(0) == '\"')
                             data[1] = data[1].replaceAll("\"", "");
 
-                        if(!data[0].equals(bookControlNumber)) {
+                        if(data[0].equals(bookControlNumber)) {
+
+                        }else {
                             for(int i=0;i<data.length;i++) {
-                                if(!data[i].contains(","))
-                                    temp2+="\"\"\""+data[i]+"\"\"\",";
+                                if(data[i].contains(","))
+                                    temp+="\"\"\""+data[i]+"\"\"\",";
                                 else
-                                    temp2+=data[i]+",";
+                                    temp+=data[i]+",";
                             }
-                            temp2+="\n";
+
+                            temp+="\n";
                         }
                     }
                 }
@@ -152,7 +156,7 @@ public class ReturnBook extends JPanel {
                 reader.close();
 
                 writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8));
-                writer.write(temp2);
+                writer.write(temp);
                 writer.close();
                 JOptionPane.showMessageDialog(null, "\n도서명: " + rentInfo.replaceAll("\"", "") + "\n\n반납이 완료되었습니다");
                 System.out.println("파일 수정이 완료되었습니다!!!");
@@ -164,4 +168,6 @@ public class ReturnBook extends JPanel {
             e.printStackTrace();
         }
     }
+
+
 }
