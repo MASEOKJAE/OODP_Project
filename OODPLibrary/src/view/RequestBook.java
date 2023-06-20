@@ -6,7 +6,7 @@ import java.io.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import Controller.LibrarySystem;
+import Controller.system.LibrarySystem;
 
 @SuppressWarnings("serial")
 public class RequestBook extends JPanel {

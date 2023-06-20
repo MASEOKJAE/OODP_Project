@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4433f1a4-2cba-487c-b580-daa0c31eb2a2" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-    </list>
+    <list default="true" id="4433f1a4-2cba-487c-b580-daa0c31eb2a2" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +13,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -79,6 +78,7 @@
       <workItem from="1685546274467" duration="22279000" />
       <workItem from="1685634142023" duration="2537000" />
       <workItem from="1686548000824" duration="238000" />
+      <workItem from="1687268111362" duration="15078000" />
     </task>
     <servers />
   </component>

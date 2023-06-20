@@ -1,64 +1,56 @@
 package View;
 
-import Controller.LibrarySystem;
+import Controller.system.LibrarySystem;
 import Controller.admin.RequestAdmin;
-import Controller.LibrarySystem;
 
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 // ModeState 인터페이스
-interface ModeState {
-    void applyMode(AdminPage adminPage);
-}
-
-// LightModeState 클래스 (라이트 모드)
-class LightModeState implements ModeState {
-    @Override
-    public void applyMode(AdminPage adminPage) {
-        adminPage.setPanelBackground(Color.WHITE);
-    }
-}
-
-// DarkModeState 클래스 (다크 모드)
-class DarkModeState implements ModeState {
-    @Override
-    public void applyMode(AdminPage adminPage) {
-        adminPage.setPanelBackground(Color.BLACK);
-    }
-}
-
-// DarkModeButton 클래스
-class DarkModeButton extends JButton {
-    private AdminPage adminPage;
-    private ModeState lightModeState;
-    private ModeState darkModeState;
-    private ModeState currentState;
-
-    public DarkModeButton(AdminPage adminPage) {
-        this.adminPage = adminPage;
-        lightModeState = new LightModeState();
-        darkModeState = new DarkModeState();
-        currentState = lightModeState;
-
-        setText("다크 모드");
-        addActionListener(e -> toggleMode()); // ActionListener 추가
-    }
-
-    private void toggleMode() {
-        currentState.applyMode(adminPage);
-        currentState = (currentState == lightModeState) ? darkModeState : lightModeState;
-        setText((currentState == lightModeState) ? "다크 모드" : "라이트 모드");
-    }
-}
+//interface ModeState {
+//    void applyMode(AdminPage adminPage);
+//}
+//
+//// LightModeState 클래스 (라이트 모드)
+//class LightModeState implements ModeState {
+//    @Override
+//    public void applyMode(AdminPage adminPage) {
+//        adminPage.setPanelBackground(Color.WHITE);
+//    }
+//}
+//
+//// DarkModeState 클래스 (다크 모드)
+//class DarkModeState implements ModeState {
+//    @Override
+//    public void applyMode(AdminPage adminPage) {
+//        adminPage.setPanelBackground(Color.BLACK);
+//    }
+//}
+//
+//// DarkModeButton 클래스
+//class DarkModeButton extends JButton {
+//    private AdminPage adminPage;
+//    private ModeState lightModeState;
+//    private ModeState darkModeState;
+//    private ModeState currentState;
+//
+//    public DarkModeButton(AdminPage adminPage) {
+//        this.adminPage = adminPage;
+//        lightModeState = new LightModeState();
+//        darkModeState = new DarkModeState();
+//        currentState = lightModeState;
+//
+//        setText("다크 모드");
+//        addActionListener(e -> toggleMode()); // ActionListener 추가
+//    }
+//
+//    private void toggleMode() {
+//        currentState.applyMode(adminPage);
+//        currentState = (currentState == lightModeState) ? darkModeState : lightModeState;
+//        setText((currentState == lightModeState) ? "다크 모드" : "라이트 모드");
+//    }
+//}
 
 public class AdminPage extends JPanel {
     private JButton backButton;             // "뒤로 가기" 버튼
@@ -72,15 +64,12 @@ public class AdminPage extends JPanel {
 
     private void setDisplay() {
         JPanel northPanel = new JPanel(new BorderLayout());
-        setLayout(new BorderLayout());
 
-        // 뒤로가기 버튼 생성
+        //뒤로가기 버튼 생성
         backButton = new JButton("뒤로 가기");
 
         JPanel backPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         backPanel.add(backButton);
-
-        add(backPanel, BorderLayout.NORTH);
 
         northPanel.add(backPanel, BorderLayout.WEST);
         add(northPanel, BorderLayout.WEST);
@@ -94,8 +83,8 @@ public class AdminPage extends JPanel {
         add(northPanel, BorderLayout.NORTH);
 
 
-        darkModeButton = new DarkModeButton(this);
-        adminPanel.add(darkModeButton);
+//        darkModeButton = new DarkModeButton(this);
+//        adminPanel.add(darkModeButton);
 
         add(adminPanel, BorderLayout.CENTER);
     }
@@ -124,17 +113,17 @@ public class AdminPage extends JPanel {
         });
     }
 
-    public void setPanelBackground(Color color) {
-        setBackground(color);
-        setComponentsBackground(this, color);
-    }
-
-    private void setComponentsBackground(Container container, Color color) {
-        for (Component component : container.getComponents()) {
-            if (component instanceof Container) {
-                setComponentsBackground((Container) component, color);
-            }
-            component.setBackground(color);
-        }
-    }
+//    public void setPanelBackground(Color color) {
+//        setBackground(color);
+//        setComponentsBackground(this, color);
+//    }
+//
+//    private void setComponentsBackground(Container container, Color color) {
+//        for (Component component : container.getComponents()) {
+//            if (component instanceof Container) {
+//                setComponentsBackground((Container) component, color);
+//            }
+//            component.setBackground(color);
+//        }
+//    }
 }

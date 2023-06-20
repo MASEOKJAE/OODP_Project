@@ -1,17 +1,19 @@
-package Controller;
+package Controller.system;
 
 import javax.swing.*;
 
 import Model.User;
+//import Controller.system.Light;
 import View.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class LibrarySystem extends JFrame {
     private JButton adminButton;        // "관리" 버튼
-    private boolean isLoginSuccess;
+    private boolean isLoginSuccess;     // 로그인 성공 여부
     private JButton searchButton;       // "도서 검색" 버튼
     private JButton requestButton;      // "도서 요청" 버튼
     private JButton rentButton;         // "도서 빌림" 버튼
@@ -19,8 +21,11 @@ public class LibrarySystem extends JFrame {
 
     private JButton returnButton;       // "도서 반납" 버튼
     private JButton loginButton;        // "로그인" 버튼
+    private JButton darkModeButton;        // "다크 모드" 버튼
+    private Light light;                // 다크 모드 정보
 
     public LibrarySystem() {
+        this.light = Light.getInstance();
         setDisplay();
         addListener();
     }
@@ -36,7 +41,7 @@ public class LibrarySystem extends JFrame {
         setLayout(new BorderLayout());
 
         // 도서관 이미지 추가
-        ImageIcon libraryImage = new ImageIcon(getClass().getResource("../Model/resources/LibLogo.png"));
+        ImageIcon libraryImage = new ImageIcon(getClass().getResource("../../Model/resources/LibLogo.png"));
         Image scaledImage = libraryImage.getImage().getScaledInstance(200, -1, Image.SCALE_SMOOTH); // 이미지 크기 조정
         libraryImage = new ImageIcon(scaledImage);
         JLabel libraryImageLabel = new JLabel(libraryImage);
@@ -58,6 +63,13 @@ public class LibrarySystem extends JFrame {
         adminPanel.add(adminButton);
         northPanel.add(adminPanel, BorderLayout.CENTER);
         add(northPanel, BorderLayout.NORTH);
+
+        // 다크 모드 버튼 추가
+        this.darkModeButton = new JButton("다크 모드");
+
+        JPanel darkModePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        darkModePanel.add(darkModeButton);
+        add(darkModePanel, BorderLayout.SOUTH);
 
         // 메뉴 버튼 추가
         JPanel menuButtonPanel = new JPanel(new GridLayout(1, 5));
@@ -183,11 +195,30 @@ public class LibrarySystem extends JFrame {
             }
         });
 
+        // Dark Mode 실행
+        darkModeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(darkModeButton.getText().equals("다크 모드")) {
+                    light.on_button_pushed();
+
+                    updateDarkModeButton();
+                } else {
+                    light.off_button_pushed();
+
+                    updateDarkModeButton();
+                }
+            }
+        });
+
         // 초기 권한값 설정
         setLoginSuccess(User.auth);
 
         // updateMenuButton 호출
         updateMenuButton();
+
+        // updateDarkModeButton 호출
+        updateDarkModeButton();
     }
 
     // isLoginSuccess setter
@@ -211,5 +242,41 @@ public class LibrarySystem extends JFrame {
 
         // 로그아웃 버튼 활성화
         loginButton.setText(isLoginSuccess ? "로그아웃" : "로그인");
+    }
+
+    // 다크 모드 버튼 업데이트 메서드
+    public void updateDarkModeButton() {
+        if (light.isDarkMode()) {
+            darkModeButton.setText("라이트 모드");
+            try {
+                UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+                UIManager.put("Button.background", Color.DARK_GRAY);
+                UIManager.put("Button.foreground", Color.WHITE);
+                UIManager.put("Panel.background", Color.BLACK);
+
+                SwingUtilities.updateComponentTreeUI(this);
+
+                revalidate();
+                repaint();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            darkModeButton.setText("다크 모드");
+            try {
+                System.out.println("여기 라이트 모드 등장이요 ~");
+                UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+                UIManager.put("Button.background", Color.LIGHT_GRAY);
+                UIManager.put("Button.foreground", Color.BLACK);
+                UIManager.put("Panel.background", Color.WHITE);
+
+                SwingUtilities.updateComponentTreeUI(this);
+
+                revalidate();
+                repaint();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

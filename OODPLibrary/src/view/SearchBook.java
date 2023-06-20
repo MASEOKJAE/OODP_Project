@@ -16,7 +16,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.JTextField;
-import Controller.LibrarySystem;
+import Controller.system.LibrarySystem;
 import Controller.searchBook.SearchType;
 
 @SuppressWarnings("serial")

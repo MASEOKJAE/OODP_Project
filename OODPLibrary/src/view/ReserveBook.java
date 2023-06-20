@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
-import Controller.LibrarySystem;
+import Controller.system.LibrarySystem;
 import Model.User;
 
 @SuppressWarnings("serial")
