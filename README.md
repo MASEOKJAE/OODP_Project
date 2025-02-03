@@ -137,8 +137,8 @@ Visualizing **book reservation status changes** from available to reserved, loan
 ### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/your-repository/H-Library-System.git
-cd H-Library-System
+git clone https://github.com/MASEOKJAE/OODP_Project.git
+cd OODP_Project
 ```
 
 ### 2️⃣ Compile & Run
@@ -150,8 +150,8 @@ java -cp bin Main
 
 ### 3️⃣ **Admin Login Credentials**
 
-- **Username:** `admin`
-- **Password:** `password123`
+- **Username:** `1234`
+- **Password:** `1234`
 
 ---
 
