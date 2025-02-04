@@ -6,13 +6,13 @@
 
 **Team B**
 
-👤 **Dongheon Lee** | 21600490 | **Data Architect**
+👤 **Dongheon Lee** | 21600490 | **Project Manager**
 
-👤 **Sooyeong Kim** | 21800109 | **Technical Writer & Documentation Specialist**
+👤 **Sooyeong Kim** | 21800109 | **Architecture Designer**
 
-👤 **Seokjae Ma** | 21800239 | **Lead Software Engineer**
+👤 **Seokjae Ma** | 21800239 | **System Developer**
 
-👤 **Kihong Park** | 21800264 | **Software Engineer**
+👤 **Kihong Park** | 21800264 | **Document Manager**
 
 ---
 
@@ -77,36 +77,122 @@ The **H-Library System** is designed to **automate and optimize** the process of
 
 ## 📑 System Design
 
-### 1️⃣ **Use Case Diagrams**
+## **1️⃣ Use Case Diagrams**
 
-<img width=70% alt="image" src="https://github.com/user-attachments/assets/011c8a9a-ee9f-4693-924c-795ee413d873" />
+<img width=70% alt="Use Case Diagram" src="https://github.com/user-attachments/assets/011c8a9a-ee9f-4693-924c-795ee413d873" />
 
-Illustrating **user interactions** with the system. This includes scenarios for:
+Illustrating **user interactions** with the system, including scenarios for:
 
-- **Requesting a Book**: Users can enter book details such as name, author, and publisher on a dedicated request page.
-- **Receiving Book Requests**: Librarians receive and process book requests, updating their status within the system.
-- **Searching for a Book**: Users can search for books by various criteria and view detailed information about availability and location.
-- **Loaning and Returning Books**: Includes sequences for loan approvals, book returns, and handling unavailable books.
+- 📚 **Requesting a Book**: Users can enter book details such as name, author, and publisher on a dedicated request page.
+- 📩 **Receiving Book Requests**: Librarians receive and process book requests, updating their status within the system.
+- 🔍 **Searching for a Book**: Users can search for books by various criteria and view detailed information about availability and location.
+- 📖 **Loaning and Returning Books**: Includes sequences for loan approvals, book returns, and handling unavailable books.
 
-### 2️⃣ **Class Diagram**
+---
 
-<img width=70% alt="image" src="https://github.com/user-attachments/assets/e98d64c3-57bc-45e0-b0b9-478bf68f9cb0" />
+## **2️⃣ Use Case Scenarios**
 
+The following table outlines detailed **use case scenarios**, including key participants, flow of events, and system quality requirements.
+
+### **📌 Request a Book**
+
+| **Aspect** | **Details** |
+| --- | --- |
+| **Participating Actor** | 📌 User |
+| **Flow of Events** | 1. The user enters the book request page. 2. The system displays fields for book name, author, publisher, and published date. 3. The user fills in the details and submits the request. |
+| **Entry Condition** | The book requested is not available in the library. |
+| **Exit Condition** | The system successfully records and receives the book request. |
+| **Quality Requirements** | - 🖥️ **Interface**: The system must provide a responsive and user-friendly request page. - 🎯 **Accuracy**: User input should be validated before submission. - 🔔 **Immediate Notification**: The system should instantly notify the librarian of a new book request. |
+
+---
+
+### **📌 Receive a Book Request**
+
+| **Aspect** | **Details** |
+| --- | --- |
+| **Participating Actor** | 📌 Librarian |
+| **Flow of Events** | 1. The librarian logs into the system and navigates to the book request section. 2. The system displays a list of requested books. 3. The librarian reviews and updates the book request status. |
+| **Entry Condition** | - The librarian is logged into the system. - A book request has been submitted by a user. |
+| **Exit Condition** | The librarian successfully acknowledges and processes the request. |
+| **Quality Requirements** | - ⏳ **Prompt Response**: The system must notify the librarian of new requests without delay. - 💬 **User Communication**: The librarian should be able to provide feedback to users regarding their requests. |
+
+---
+
+### **📌 Searching for a Book**
+
+| **Aspect** | **Details** |
+| --- | --- |
+| **Participating Actor** | 📌 User |
+| **Flow of Events** | 1. The system presents a menu with options: search books, request books, rent books, reserve books, return books. 2. The user selects the **search books** option. 3. The system displays input fields for search criteria (book name, author, publisher, published date). 4. The user enters search criteria. 5. The system retrieves and displays matching books with details (title, author, publisher, year, loan availability). 6. The user notes the book number for future reference. |
+| **Entry Condition** | The user is logged into the system and wishes to check book availability. |
+| **Exit Condition** | The user successfully retrieves book information. |
+| **Quality Requirements** | - 📜 **Informative**: The system should clearly present book details. - 🔍 **Efficient Search**: Users should be able to filter by various parameters (title, author, publisher, etc.). |
+
+---
+
+### **📌 Loan a Book**
+
+| **Aspect** | **Details** |
+| --- | --- |
+| **Participating Actor** | 📌 User |
+| **Flow of Events** | 1. The user selects **search books**. 2. The system prompts for search input. 3. The user enters the **book number** for the book they wish to borrow. 4. The system validates the request, updates the book's availability status, assigns the loan to the user, and displays a success message. |
+| **Entry Condition** | The user is logged in and has found an available book. |
+| **Exit Condition** | The user successfully borrows the book, and the system updates the loan record. |
+| **Quality Requirements** | - ✅ **Real-time Updates**: The system must reflect loan status instantly. - 🔄 **Accurate Tracking**: User accounts should maintain a record of borrowed books. |
+
+---
+
+### **📌 Fail to Loan a Book**
+
+| **Aspect** | **Details** |
+| --- | --- |
+| **Participating Actor** | 📌 User |
+| **Flow of Events** | 1. The user selects **search books**. 2. The system prompts for search input. 3. The user enters the **book number**. 4. If the book is already loaned, the system displays an error message: **"The book is already loaned."** |
+| **Entry Condition** | The user is logged in and attempts to borrow a book. |
+| **Exit Condition** | The user is informed that the book is unavailable. |
+| **Quality Requirements** | - ⚠️ **Clear Feedback**: The system should display a **precise message** when a book is unavailable. - 🔍 **Up-to-Date Information**: The system must reflect real-time loan status. |
+
+---
+
+### 3️⃣ **Class Diagram**
+
+<img width=70% alt="image" src="https://github.com/user-attachments/assets/e98d64c3-57bc-45e0-b0b9-478bf68f9cb0" />  
 <img width=70% alt="image" src="https://github.com/user-attachments/assets/9ea3c0d1-fe73-404a-9a31-9b8898ebe879" />
 
-Representing the **system's structure** with major classes and their relationships. This diagram is divided into two parts due to its extensive nature.
+📌 **Overview**
 
-### 3️⃣ **Sequence Diagram**
+The class diagram defines the **structure of the system**, showing key classes and their relationships.
+
+- Core entities such as **User, Librarian, and Book** are included, with **inheritance, association, and dependency relationships** clearly illustrated.
+- The first diagram focuses on **users and book-related classes**, while the second diagram covers **loan and request processing classes**.
+
+---
+
+### 4️⃣ **Sequence Diagram**
 
 <img width=70% alt="image" src="https://github.com/user-attachments/assets/8b17d59b-483c-491b-8c65-f3e62da10e90" />
 
-Depicting **book loan and return processes**, focusing on interactions between system components during these actions.
+📌 **Overview**
 
-### 4️⃣ **State Diagram**
+The sequence diagram illustrates the **book loan and return process**, depicting the **flow of messages between system components**.
+
+- When a user requests a book loan, the system verifies the book's availability and determines loan eligibility.
+- During the return process, the system updates the loan status and notifies any users with pending reservations.
+- The primary interaction follows the sequence: **User → Library System → Book DB → Librarian**.
+
+---
+
+### 5️⃣ **State Diagram**
 
 <img width=70% alt="image" src="https://github.com/user-attachments/assets/539c3cfd-834b-4732-bc18-d31dfd08c13a" />
 
-Visualizing **book reservation status changes** from available to reserved, loaned, and returned.
+📌 **Overview**
+
+The state diagram represents **the transitions of a book's status** within the library system.
+
+- A book moves through the states: **Available → Reserved → Loaned → Returned**.
+- Specific states trigger **automatic notifications** or system messages indicating book availability.
+- If a book is returned and a reservation exists, the system **automatically assigns the book to the next user in line**.
 
 ---
 
