@@ -99,10 +99,10 @@ The following table outlines detailed **use case scenarios**, including key part
 | **Aspect** | **Details** |
 | --- | --- |
 | **Participating Actor** | 📌 User |
-| **Flow of Events** | 1. The user enters the book request page. 2. The system displays fields for book name, author, publisher, and published date. 3. The user fills in the details and submits the request. |
+| **Flow of Events** | 1. The user enters the book request page.<br> 2. The system displays fields for book name, author, publisher, and published date.<br> 3. The user fills in the details and submits the request. |
 | **Entry Condition** | The book requested is not available in the library. |
 | **Exit Condition** | The system successfully records and receives the book request. |
-| **Quality Requirements** | - 🖥️ **Interface**: The system must provide a responsive and user-friendly request page. - 🎯 **Accuracy**: User input should be validated before submission. - 🔔 **Immediate Notification**: The system should instantly notify the librarian of a new book request. |
+| **Quality Requirements** | 🖥️ **Interface**: The system must provide a responsive and user-friendly request page.<br> 🎯 **Accuracy**: User input should be validated before submission.<br> 🔔 **Immediate Notification**: The system should instantly notify the librarian of a new book request. |
 
 ---
 
@@ -111,10 +111,10 @@ The following table outlines detailed **use case scenarios**, including key part
 | **Aspect** | **Details** |
 | --- | --- |
 | **Participating Actor** | 📌 Librarian |
-| **Flow of Events** | 1. The librarian logs into the system and navigates to the book request section. 2. The system displays a list of requested books. 3. The librarian reviews and updates the book request status. |
-| **Entry Condition** | - The librarian is logged into the system. - A book request has been submitted by a user. |
+| **Flow of Events** | 1. The librarian logs into the system and navigates to the book request section.<br> 2. The system displays a list of requested books.<br> 3. The librarian reviews and updates the book request status. |
+| **Entry Condition** | - The librarian is logged into the system.<br> - A book request has been submitted by a user. |
 | **Exit Condition** | The librarian successfully acknowledges and processes the request. |
-| **Quality Requirements** | - ⏳ **Prompt Response**: The system must notify the librarian of new requests without delay. - 💬 **User Communication**: The librarian should be able to provide feedback to users regarding their requests. |
+| **Quality Requirements** | ⏳ **Prompt Response**: The system must notify the librarian of new requests without delay.<br> 💬 **User Communication**: The librarian should be able to provide feedback to users regarding their requests. |
 
 ---
 
@@ -123,10 +123,10 @@ The following table outlines detailed **use case scenarios**, including key part
 | **Aspect** | **Details** |
 | --- | --- |
 | **Participating Actor** | 📌 User |
-| **Flow of Events** | 1. The system presents a menu with options: search books, request books, rent books, reserve books, return books. 2. The user selects the **search books** option. 3. The system displays input fields for search criteria (book name, author, publisher, published date). 4. The user enters search criteria. 5. The system retrieves and displays matching books with details (title, author, publisher, year, loan availability). 6. The user notes the book number for future reference. |
+| **Flow of Events** | 1. The system presents a menu with options: search books, request books, rent books, reserve books, return books.<br> 2. The user selects the **search books** option.<br> 3. The system displays input fields for search criteria (book name, author, publisher, published date).<br> 4. The user enters search criteria.<br> 5. The system retrieves and displays matching books with details (title, author, publisher, year, loan availability).<br> 6. The user notes the book number for future reference. |
 | **Entry Condition** | The user is logged into the system and wishes to check book availability. |
 | **Exit Condition** | The user successfully retrieves book information. |
-| **Quality Requirements** | - 📜 **Informative**: The system should clearly present book details. - 🔍 **Efficient Search**: Users should be able to filter by various parameters (title, author, publisher, etc.). |
+| **Quality Requirements** | 📜 **Informative**: The system should clearly present book details.<br> 🔍 **Efficient Search**: Users should be able to filter by various parameters (title, author, publisher, etc.). |
 
 ---
 
@@ -135,10 +135,10 @@ The following table outlines detailed **use case scenarios**, including key part
 | **Aspect** | **Details** |
 | --- | --- |
 | **Participating Actor** | 📌 User |
-| **Flow of Events** | 1. The user selects **search books**. 2. The system prompts for search input. 3. The user enters the **book number** for the book they wish to borrow. 4. The system validates the request, updates the book's availability status, assigns the loan to the user, and displays a success message. |
+| **Flow of Events** | 1. The user selects **search books**.<br> 2. The system prompts for search input.<br> 3. The user enters the **book number** for the book they wish to borrow.<br> 4. The system validates the request, updates the book's availability status, assigns the loan to the user, and displays a success message. |
 | **Entry Condition** | The user is logged in and has found an available book. |
 | **Exit Condition** | The user successfully borrows the book, and the system updates the loan record. |
-| **Quality Requirements** | - ✅ **Real-time Updates**: The system must reflect loan status instantly. - 🔄 **Accurate Tracking**: User accounts should maintain a record of borrowed books. |
+| **Quality Requirements** | ✅ **Real-time Updates**: The system must reflect loan status instantly.<br> 🔄 **Accurate Tracking**: User accounts should maintain a record of borrowed books. |
 
 ---
 
@@ -147,10 +147,10 @@ The following table outlines detailed **use case scenarios**, including key part
 | **Aspect** | **Details** |
 | --- | --- |
 | **Participating Actor** | 📌 User |
-| **Flow of Events** | 1. The user selects **search books**. 2. The system prompts for search input. 3. The user enters the **book number**. 4. If the book is already loaned, the system displays an error message: **"The book is already loaned."** |
+| **Flow of Events** | 1. The user selects **search books**.<br> 2. The system prompts for search input.<br> 3. The user enters the **book number**.<br> 4. If the book is already loaned, the system displays an error message: **"The book is already loaned."** |
 | **Entry Condition** | The user is logged in and attempts to borrow a book. |
 | **Exit Condition** | The user is informed that the book is unavailable. |
-| **Quality Requirements** | - ⚠️ **Clear Feedback**: The system should display a **precise message** when a book is unavailable. - 🔍 **Up-to-Date Information**: The system must reflect real-time loan status. |
+| **Quality Requirements** | ⚠️ **Clear Feedback**: The system should display a **precise message** when a book is unavailable.<br> 🔍 **Up-to-Date Information**: The system must reflect real-time loan status. |
 
 ---
 
